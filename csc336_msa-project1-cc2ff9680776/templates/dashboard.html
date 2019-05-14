@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Dashboard</h1>
+  {% if session.logged_in and session.permission_level == 1 %}
+  <a class='btn btn-success' href="/add_staff"> Add Staff </a>
+  <hr>
+  <a class='btn btn-success' href="/add_doctor"> Add Doctor </a>
+  <hr>
+  <a class='btn btn-success' href="/list_users"> List Users </a>
+  <hr>
+  {% elif session.logged_in and session.permission_level == 2 %}
+  <table class='table table-striped'>
+    <tr>
+      <th>ID</th>
+      <th>Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Status</th>
+      <th>Doctor</th>
+      <th>Patient</th>
+      <th></th>
+      <th></th>
+    </tr>
+    {% for appointment in appointments %}
+    <tr>
+      {% if appointment.status == "pending" %}
+      <td>{{appointment.id}}</td>
+      <td>{{appointment.date}}</td>
+      <td>{{appointment.startTime}}</td>
+      <td>{{appointment.endTime}}</td>
+      <td>{{appointment.status}}</td>
+      <td>{{appointment.doctor_id}}</td>
+      <td>{{appointment.patient_id}}</td>
+      <td><form action="{{url_for('approve_appointment', id=appointment.id)}}" method = "post">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="Approve" class="btn btn-success">
+        </form>
+      </td>
+      <td><form action="{{url_for('reject_appointment', id=appointment.id)}}" method = "post">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="Reject" class="btn btn-danger">
+        </form>
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </table>
+  {% elif session.logged_in and session.permission_level == 3 %}
+  <a class='btn btn-success' href="/show_doctorprofile"> Show Profile </a>
+  <a class='btn btn-success' href="/edit_doctorprofile"> Edit Profile </a>
+  <hr>
+  {% elif session.logged_in and session.permission_level == 4 %}
+  <a class='btn btn-success' href="/patient"> Show Profile </a>
+  <a class='btn btn-success' href="/edit_patientprofile">Edit Profile</a>
+  <a class='btn btn-success' href="/show_appointment">Appointment Status</a>
+  <hr>
+  {% endif %}
+{% endblock %}

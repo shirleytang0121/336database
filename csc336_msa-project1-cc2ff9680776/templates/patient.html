@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <h1>Patient </h1>  
+    <hr>
+    <div>
+    Name: {{patient.firstname}} {{patient.lastname}}
+    <hr>
+    Username: {{user.username}}
+    <hr>
+    Email: {{patient.email}} 
+    <hr>
+    Phone Number: {{patient.phone_number}} 
+    <hr>
+    Birthday: {{patient.date_of_birth}} 
+    <hr>
+    Gender: {{patient.gender}}
+    <hr>
+    Insrance Company: {{insurance.insurance_company}}
+    <hr>
+    Insrance ID: {{insurance.insurance_id}}
+    <hr>
+    Group Name: {{insurance.group_name}} 
+    </div>
+{% endblock %}

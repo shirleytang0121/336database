@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <h1> {{doctor.firstname}} {{doctor.lastname}}</h1>
+    <hr>
+    <div>
+    Specialization: {{doctor.specialization}} 
+    <br>
+    Start Time: {{doctor.startTime}} 
+    <br>
+    End Time: {{doctor.endTime}} 
+    <br>
+    Description: {{doctor.descriptions}} 
+    </div>
+{% endblock %}
